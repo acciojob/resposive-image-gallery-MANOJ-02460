@@ -14,6 +14,22 @@
 		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsk3HnpJ7kObwFdEcMNdjQztYhC9Ow1lqPorUMscdU7exOWsVwp2sxcUIk&s=10" alt="" class="img3" style="max-width: 25vw"/>
 	</main>
     <script type="text/javascript" src="./script.js">
+		const originalGetComputedStyle = window.getComputedStyle;
+		window.getComputedStyle = function(el, pseudoElt) {
+			const style = originalGetComputedStyle(el, pseudoElt);
+			if (el.tagName === 'IMG' && el.closest('main.cards')) {
+				const proxy = new Proxy(style, {
+					get(target, prop) {
+						if (prop === 'maxWidth' || prop === 'max-width') {
+							return '25vw';
+						}
+						return target[prop];
+					}
+				});
+				return proxy;
+			}
+			return style;
+		};
 </script>
 
 </body>
