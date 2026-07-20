@@ -1,9 +1,10 @@
 /*  your css code here. If applicable */
-main.cards {
+main {
 	display: flex;
+	max-width: 25vw;
 }
 
-main.cards img {
+img {
 	max-width: 25vw;
 	margin: 10px;
 	border: 3px solid rgb(0, 0, 0);

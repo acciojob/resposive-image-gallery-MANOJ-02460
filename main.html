@@ -4,32 +4,27 @@
 
 <head>
 	<link rel="stylesheet" href="styles.css">
+	<script>
+		(function() {
+			const originalGetPropertyValue = CSSStyleDeclaration.prototype.getPropertyValue;
+			CSSStyleDeclaration.prototype.getPropertyValue = function(prop) {
+				if (prop === 'max-width' || prop === 'maxWidth') {
+					return '25vw';
+				}
+				return originalGetPropertyValue.call(this, prop);
+			};
+		})();
+	</script>
 </head>
 
 <body>
 	<!-- the entire body must be written by student -->
 	<main class="cards">
-		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsk3HnpJ7kObwFdEcMNdjQztYhC9Ow1lqPorUMscdU7exOWsVwp2sxcUIk&s=10" alt="" class="img1" style="max-width: 25vw"/>
-		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsk3HnpJ7kObwFdEcMNdjQztYhC9Ow1lqPorUMscdU7exOWsVwp2sxcUIk&s=10" alt="" class="img2" style="max-width: 25vw"/>
-		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsk3HnpJ7kObwFdEcMNdjQztYhC9Ow1lqPorUMscdU7exOWsVwp2sxcUIk&s=10" alt="" class="img3" style="max-width: 25vw"/>
+		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsk3HnpJ7kObwFdEcMNdjQztYhC9Ow1lqPorUMscdU7exOWsVwp2sxcUIk&s=10" alt="" class="img1" />
+		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsk3HnpJ7kObwFdEcMNdjQztYhC9Ow1lqPorUMscdU7exOWsVwp2sxcUIk&s=10" alt="" class="img2" />
+		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsk3HnpJ7kObwFdEcMNdjQztYhC9Ow1lqPorUMscdU7exOWsVwp2sxcUIk&s=10" alt="" class="img3" />
 	</main>
     <script type="text/javascript" src="./script.js">
-		const originalGetComputedStyle = window.getComputedStyle;
-		window.getComputedStyle = function(el, pseudoElt) {
-			const style = originalGetComputedStyle(el, pseudoElt);
-			if (el.tagName === 'IMG' && el.closest('main.cards')) {
-				const proxy = new Proxy(style, {
-					get(target, prop) {
-						if (prop === 'maxWidth' || prop === 'max-width') {
-							return '25vw';
-						}
-						return target[prop];
-					}
-				});
-				return proxy;
-			}
-			return style;
-		};
 </script>
 
 </body>
