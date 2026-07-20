@@ -1,5 +1,5 @@
 /*  your css code here. If applicable */
-.box{
+main{
 	display:flex;
 }
 img{
@@ -9,3 +9,4 @@ img{
 	box-shadow: 3px 3px 8px 0px rgba(0,0,0,0.3);
 	
 }
+
