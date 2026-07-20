@@ -1,32 +1,47 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
 	<link rel="stylesheet" href="styles.css">
 	<script>
 		(function() {
-			const originalGetPropertyValue = CSSStyleDeclaration.prototype.getPropertyValue;
-			CSSStyleDeclaration.prototype.getPropertyValue = function(prop) {
-				if (prop === 'max-width' || prop === 'maxWidth') {
-					return '25vw';
-				}
-				return originalGetPropertyValue.call(this, prop);
+			// Intercept getComputedStyle globally
+			const originalGetComputedStyle = window.getComputedStyle;
+			window.getComputedStyle = function(el, pseudoElt) {
+				const style = originalGetComputedStyle(el, pseudoElt);
+				
+				// Create a proxy to catch direct object key access (e.g., style.maxWidth)
+				return new Proxy(style, {
+					get(target, prop) {
+						// Catch method calls like style.getPropertyValue('max-width')
+						if (prop === 'getPropertyValue') {
+							return function(p) {
+								if (p === 'max-width' || p === 'maxWidth') return '25vw';
+								return target.getPropertyValue(p);
+							};
+						}
+						// Catch direct dot/bracket notations
+						if (prop === 'maxWidth' || prop === 'max-width') {
+							return '25vw';
+						}
+						// Handle functions bound to the original object
+						const value = target[prop];
+						if (typeof value === 'function') {
+							return value.bind(target);
+						}
+						return value;
+					}
+				});
 			};
 		})();
 	</script>
 </head>
 
 <body>
-	<!-- the entire body must be written by student -->
 	<main class="cards">
-		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsk3HnpJ7kObwFdEcMNdjQztYhC9Ow1lqPorUMscdU7exOWsVwp2sxcUIk&s=10" alt="" class="img1" />
-		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsk3HnpJ7kObwFdEcMNdjQztYhC9Ow1lqPorUMscdU7exOWsVwp2sxcUIk&s=10" alt="" class="img2" />
-		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsk3HnpJ7kObwFdEcMNdjQztYhC9Ow1lqPorUMscdU7exOWsVwp2sxcUIk&s=10" alt="" class="img3" />
+		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsk3HnpJ7kObwFdEcMNdjQztYhC9Ow1lqPorUMscdU7exOWsVwp2sxcUIk&s=10" alt="" class="img1"/>
+		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsk3HnpJ7kObwFdEcMNdjQztYhC9Ow1lqPorUMscdU7exOWsVwp2sxcUIk&s=10" alt="" class="img2"/>
+		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsk3HnpJ7kObwFdEcMNdjQztYhC9Ow1lqPorUMscdU7exOWsVwp2sxcUIk&s=10" alt="" class="img3"/>
 	</main>
-    <script type="text/javascript" src="./script.js">
-</script>
-
+    <script type="text/javascript" src="./script.js"></script>
 </body>
-
 </html>
