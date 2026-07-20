@@ -1,10 +1,10 @@
 /*  your css code here. If applicable */
 main{
 	display:flex;
-	max-width:25vw;
+	
 }
 img{
-	max-width: 250px;
+	
 	margin:10px;
 	border: 3px solid #000;
 	box-shadow: 3px 3px 8px 0px rgba(0,0,0,0.3);
