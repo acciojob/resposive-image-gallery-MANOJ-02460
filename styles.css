@@ -1,6 +1,7 @@
 /*  your css code here. If applicable */
 main{
 	display:flex;
+	max-width:25vw;
 }
 img{
 	max-width: 25vw;
