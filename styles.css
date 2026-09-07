@@ -1,12 +1,11 @@
 main.cards {
 	display: flex;
-	flex-wrap: wrap; /* Allows images to flow responsively into new lines */
 	justify-content: center; /* Aligns items perfectly to the left */
 	align-items: flex-end;
 	gap: 20px
 }
 
-main.cards img {
+.img1,.img2,.img3{
     outline: 5px solid red;
 	margin: 10px;
 	border: 3px solid #000000;
