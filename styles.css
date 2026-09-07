@@ -1,15 +1,31 @@
 main.cards {
-	display: flex;
-	justify-content: center; /* Aligns items perfectly to the left */
-	align-items: flex-end;
-	gap: 20px;
-	flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
-.img1,.img2,.img3{
+.img1,
+.img2,
+.img3 {
+    width: 300px;
+    max-width: 100%;
+    object-fit: cover;
     outline: 5px solid red;
-	margin: 10px;
-	border: 3px solid #000000;
-	box-shadow: 3px 3px 8px 0px rgba(0, 0, 0, 0.3);
-	max-width:25vw;
+    margin: 10px;
+    border: 3px solid #000000;
+    box-shadow: 3px 3px 8px 0px rgba(0, 0, 0, 0.3);
+}
+
+.img1 {
+    height: 250px;
+}
+
+.img2 {
+    height: 120px;
+}
+
+.img3 {
+    height: 260px;
 }
